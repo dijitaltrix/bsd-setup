@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Update pkg to use latest
+
+# Update pkg definitions
+pkg update
+pkg upgrade
+
+# install basic packages
+pkg -y install rcadm sshguard
+
+# setup ssh key access
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 0700 ~/.ssh
+chmod 0600 ~/.ssh/authorized_keys
+
+# setup ipfw
