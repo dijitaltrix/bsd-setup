@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Update pkg location to closest to me
+echo "# United Kingdom
+Coreix: {
+    url: https://mirror.coreix.net/dragonflybsd/dports/${ABI}/LATEST,
+    enabled: yes
+}" > /usr/local/etc/pkg/repos/df-latest.conf
+
+# Update pkg definitions
+pkg update
+pkg upgrade
+
+# install basic packages
+pkg -y install rcadm sshguard
+
+# setup ssh key access
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 0700 ~/.ssh
+chmod 0600 ~/.ssh/authorized_keys
+
+# setup ipfw
