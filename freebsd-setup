@@ -1,6 +1,14 @@
 #!/bin/sh
 
 # Update pkg to use latest
+mkdir -p /usr/local/etc/pkg/repos
+echo 'FreeBSD: { \
+  url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest", \
+  mirror_type: "srv", \
+  signature_type: "fingerprints", \
+  fingerprints: "/usr/share/keys/pkg", \
+  enabled: yes \
+}' > /usr/local/etc/pkg/repos/FreeBSD.conf
 
 # Update pkg definitions
 pkg update
